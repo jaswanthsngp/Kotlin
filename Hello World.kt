@@ -1,3 +1,5 @@
 fun main() {
-    println("Hello World");
+    print("Hello, ")
+    // semicolons are optional
+    println("World!");
 }
