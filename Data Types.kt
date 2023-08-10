@@ -9,4 +9,13 @@ fun main () {
     // Operations: && || !
     // Bitwise Operators: shr, shl, ushr, and, or, xor, inv; Usage: a.and(b);
     println("${a}, ${b}, ${c}, ${d}, ${e}, ${f}");
+    var nullable: String?;
+    nullable= null;
+    // nullable variables are always to be accessed in safe mode - with a '?' with them
+    println(nullable?.length);
+    // Elivis Operator '?:' lets us return a default value if null
+    println(nullable?.length?:0);
+    nullable= "a string";
+    // you can access them withuot '?' if you are sure it is not null
+    println(nullable.length);
 }
