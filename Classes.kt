@@ -61,6 +61,64 @@ class SmartTV(name: String): SmartDevice(name, "Smart TV") {
     }
 }
 
+abstract class AbstractClass() {
+    // any class that has abstract methods is an abstract class
+    abstract fun abstractMethod();
+}
+
+class NotAbstractClass(): AbstractClass() {
+    // abstract class must be inherited and its abstract methods must be overriden
+    override fun abstractMethod() {
+        println("Hi");
+    }
+}
+
+
+sealed class SealedClass() {
+    // sealed classes can't be instantiated, but its sub classes can be
+    // helps maintaining type-safety
+    class A: SealedClass() {
+        fun display() {
+            println("A");
+        }
+    }
+    class B: SealedClass() {
+        fun display() {
+            println("B")
+        }
+    }
+}
+
+
+// enums are used to create a type with limited 
+// number of possible set of values, and using those
+enum class Directions {
+    // you can use it as string, but there is a possibitiy that
+    // someone uses 'North', and the rest 'north', which makes it
+    // complex to debug
+    NORTH, SOUTH, EAST, WEST
+    // to use, use Directions.NORTH
+}
+
+// singleton classes are simply declared as objects
+// when declared in other classes, these can also be
+// termed 'companion class', as it holds all the static
+// data required in the class and can be accessed through
+// any instance of the classs
+object SingleTimeData {
+    var x= 10;
+    // can be accessed with object name, when declared independent
+    // ClassName.ObjectName when in a class
+}
+
+fun SmartDevice.status() {
+    if(this.isOn)
+        println("This device is on");
+    else
+        println("This device is off");
+}
+
+
 fun main() {
     // instantiated using constructor
     val smartTVDevice= SmartTV("Andorid TV");
@@ -69,4 +127,20 @@ fun main() {
     smartTVDevice.volume= 25;
     // and can be accessed with/without getter too
     println("Channel: "+ smartTVDevice.channel+"\nVolume: "+smartTVDevice.volume);
+
+    // sealed class, instantiation and access
+    SealedClass.A().display()
+
+    // data classes, used only to store data
+    data class SomeData(var d: Int, var x: String);
+    println(SomeData(3, "Data class").toString());
+
+    // enumerators usage
+    println(Directions.NORTH);
+
+    // object/singleton usage
+    println(SingleTimeData.x);
+    
+    // the extension function, accessed the same way as normal fn
+    smartTVDevice.status();
 }
